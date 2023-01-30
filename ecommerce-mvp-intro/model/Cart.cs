@@ -90,6 +90,10 @@ namespace csharp_oop_ecommerce_basic.model
 
             if (p != null)
             {
+                if (p is Elettronico)
+                {
+
+                }
                 _prod[currentLenght] = p;
                 ++currentLenght;
             }

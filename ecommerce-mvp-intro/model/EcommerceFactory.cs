@@ -29,7 +29,7 @@ namespace csharp_oop_ecommerce_basic.model
         public static Cart getSampleCart()
         {
             Cart carr = new Cart(getCartID());
-            Product p = new Product(EcommerceFactory.getProductID(), "iPhone 14 128GB", "Apple", "Apple iPhone 14 128GB", 950);
+            Product p = new Elettronico(EcommerceFactory.getProductID(), "iPhone 14 128GB", "Apple", "Apple iPhone 14 128GB", 950, "nicolas ghirardi");
             carr.Add(p);
             return carr;
         }

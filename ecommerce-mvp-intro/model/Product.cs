@@ -8,7 +8,7 @@ namespace csharp_oop_ecommerce_basic.model
 
     //base version by Marco Borelli Nov 2022
     //extended and modified by olprofesur Nov-Dic 2022
-    public abstract class Product
+    abstract public class Product
     {   
         
         //ATTRIBUTES
@@ -129,15 +129,13 @@ namespace csharp_oop_ecommerce_basic.model
         }
 
         //copy constructor for clone
-        /*protected Product(Product other) : this(other.Id, other.Name, other.Manufacturer, other.Description, other.Price)
+        protected Product(Product other) : this(other.Id, other.Name, other.Manufacturer, other.Description, other.Price)
         {
         }
 
         //clone
-        public Product Clone()
-        {
-            return new Product(this);
-        }
+        abstract public Product Clone();
+        
 
 
         //Equals
@@ -155,7 +153,7 @@ namespace csharp_oop_ecommerce_basic.model
         public override string ToString()
         {
             return "Product:" +Id + ";" + Name + ";" + Manufacturer+";"+Description + ";" + Price;
-        }*/
+        }
 
     }
 }
