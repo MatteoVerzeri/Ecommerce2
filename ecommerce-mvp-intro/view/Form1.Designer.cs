@@ -43,13 +43,14 @@
             this.textBoxManifacturer = new System.Windows.Forms.TextBox();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // list
             // 
             this.list.HideSelection = false;
             this.list.Location = new System.Drawing.Point(7, 112);
-            this.list.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.list.Margin = new System.Windows.Forms.Padding(2);
             this.list.MultiSelect = false;
             this.list.Name = "list";
             this.list.Size = new System.Drawing.Size(510, 366);
@@ -61,7 +62,7 @@
             // buttonEdit
             // 
             this.buttonEdit.Location = new System.Drawing.Point(530, 247);
-            this.buttonEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(2);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(74, 42);
             this.buttonEdit.TabIndex = 1;
@@ -72,7 +73,7 @@
             // textBoxName
             // 
             this.textBoxName.Location = new System.Drawing.Point(7, 42);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(135, 20);
             this.textBoxName.TabIndex = 3;
@@ -119,7 +120,7 @@
             // textBoxDescription
             // 
             this.textBoxDescription.Location = new System.Drawing.Point(7, 82);
-            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(383, 20);
             this.textBoxDescription.TabIndex = 7;
@@ -137,15 +138,15 @@
             // textBoxPrice
             // 
             this.textBoxPrice.Location = new System.Drawing.Point(310, 42);
-            this.textBoxPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxPrice.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(67, 20);
             this.textBoxPrice.TabIndex = 9;
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(530, 52);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAdd.Location = new System.Drawing.Point(530, 20);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(74, 42);
             this.buttonAdd.TabIndex = 11;
@@ -166,7 +167,7 @@
             // textBoxManifacturer
             // 
             this.textBoxManifacturer.Location = new System.Drawing.Point(157, 42);
-            this.textBoxManifacturer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxManifacturer.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxManifacturer.Name = "textBoxManifacturer";
             this.textBoxManifacturer.Size = new System.Drawing.Size(135, 20);
             this.textBoxManifacturer.TabIndex = 12;
@@ -174,7 +175,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Location = new System.Drawing.Point(530, 306);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(74, 42);
             this.buttonDelete.TabIndex = 14;
@@ -194,11 +195,19 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 15;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(404, 82);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 484);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.label1);
@@ -214,7 +223,7 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.list);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Basic Ecommerce Sample";
             this.ResumeLayout(false);
@@ -239,6 +248,7 @@
         private System.Windows.Forms.TextBox textBoxManifacturer;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
 

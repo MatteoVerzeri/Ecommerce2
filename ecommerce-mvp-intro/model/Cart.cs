@@ -90,7 +90,8 @@ namespace csharp_oop_ecommerce_basic.model
 
             if (p != null)
             {
-                
+                _prod[currentLenght] = p;
+                currentLenght++;
             }
             else
                 throw new Exception("Invalid product");

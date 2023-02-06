@@ -21,11 +21,19 @@ namespace csharp_oop_ecommerce_basic
         public Form1()
         {
             InitializeComponent();
-
+            dateTimePicker1.Hide();
             carr = EcommerceFactory.getSampleCart();
 
             setHeaderCarrView();
             updateCarrView();
+            if (comboBox1.SelectedIndex == 0)
+            {
+                dateTimePicker1.Hide();
+            }
+            else if(comboBox1.SelectedIndex == 1)
+            {
+                dateTimePicker1.Show();
+            }
         }
 
 
@@ -34,9 +42,26 @@ namespace csharp_oop_ecommerce_basic
             try
             {
                 
-                Product p = new Elettronico(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "nicolas ghirardi");
-                carr.Add(p);
-                updateCarrView();
+                if (comboBox1.SelectedIndex == 0)
+                {
+                    
+                    Product p = new Elettronico(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "nicolas ghirardi");
+                    carr.Add(p);
+                    updateCarrView();
+                }
+                if (comboBox1.SelectedIndex == 1)
+                {
+                    
+                    Product p = new Alimentare(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text),dateTimePicker1.Value,null);
+                    carr.Add(p);
+                    updateCarrView();
+                }
+                /*if (comboBox1.SelectedIndex == 0)
+                {
+                    Product p = new Cancelleria(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "nicolas ghirardi");
+                    carr.Add(p);
+                    updateCarrView();
+                }*/
 
             } catch(Exception ex)
             {
@@ -146,7 +171,7 @@ namespace csharp_oop_ecommerce_basic
                 item.SubItems.Add(prodotti[i].Name);
                 item.SubItems.Add(prodotti[i].Manufacturer);
                 item.SubItems.Add(prodotti[i].Description);
-                item.SubItems.Add(""+prodotti[i].Price);
+                item.SubItems.Add("" + prodotti[i].getPrice());
                 list.Items.Add(item);
             }
 
