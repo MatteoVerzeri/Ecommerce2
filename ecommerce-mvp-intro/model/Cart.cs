@@ -90,16 +90,7 @@ namespace csharp_oop_ecommerce_basic.model
 
             if (p != null)
             {
-                if (p is Elettronico)
-                {
-                    DateTime today = DateTime.Today;
-                    if(today.DayOfWeek == DayOfWeek.Monday)
-                    {
-                        p.Price = (p.Price * 95) / 100;
-                    }
-                }
-                _prod[currentLenght] = p;
-                ++currentLenght;
+                
             }
             else
                 throw new Exception("Invalid product");

@@ -154,6 +154,9 @@ namespace csharp_oop_ecommerce_basic.model
         {
             return "Product:" +Id + ";" + Name + ";" + Manufacturer+";"+Description + ";" + Price;
         }
-
+        public virtual float getPrice()
+        {
+            return Price;
+        }
     }
 }

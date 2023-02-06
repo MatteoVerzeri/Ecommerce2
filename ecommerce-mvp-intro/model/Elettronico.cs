@@ -30,5 +30,15 @@ namespace csharp_oop_ecommerce_basic.model
         {
             return new Elettronico(this);
         }
+        public override float getPrice()
+        {
+            float temp=base.getPrice();
+                DateTime today = DateTime.Today;
+                if (today.DayOfWeek == DayOfWeek.Monday)
+                {
+                    Price = (Price * 95) / 100;
+                }
+            return base.getPrice();
+        }
     }
 }

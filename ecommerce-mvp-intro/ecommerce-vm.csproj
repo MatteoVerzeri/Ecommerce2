@@ -51,7 +51,6 @@
     <Compile Include="model\Cart.cs" />
     <Compile Include="model\EcommerceFactory.cs" />
     <Compile Include="model\Elettronico.cs" />
-    <Compile Include="model\Scaduto.cs" />
     <Compile Include="view\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
