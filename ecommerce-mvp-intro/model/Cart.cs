@@ -9,12 +9,26 @@ namespace csharp_oop_ecommerce_basic.model
     public class Cart
     {
         //attributes
+        private float totale = 0;
+        private float totale_S = 0;
         private const int MAXCARR = 999;
         private string _id;
         private int currentLenght;
-        private Product[] _prod = new Product[MAXCARR];
+        List<Product> oggetti = new List<Product>();
 
         //properties
+        public List<Product> Oggetti
+        {
+            get
+            {
+                return oggetti;
+            }
+            private set
+            {
+                oggetti = value;
+            }
+
+        }
         public string Id
         {
             get
@@ -29,41 +43,28 @@ namespace csharp_oop_ecommerce_basic.model
                     throw new Exception("Invalid Id");
             }
         }
-
-        public Product[] Products
+        public float getTotale()
         {
-            get
-            {
-                Product[] p = new Product[currentLenght];
-                for(int i=0; i<currentLenght; i++)
-                {
-                    p[i] = _prod[i];
-                }
-                return p;
-            }
-            //set{
-            // 
-            //}
+            return totale;
+        }
+        public float getTotale_S()
+        {
+            return totale_S;
         }
 
         //constructors
         public Cart(string id)
         {
             this.Id = id;
-            Clear();
+            oggetti.Clear();
         }
 
-        //copy constrcutor for clone
+
         protected Cart(Cart c) : this(c.Id)
         {
-            Id = c.Id;
-            currentLenght = c.currentLenght;
-            for (int i = 0; i < c._prod.Length; i++)
+            foreach (Product p in c.Oggetti)
             {
-                if (c._prod[i] != null)
-                {
-                    _prod[i] = c._prod[i].Clone();
-                }
+                this.Oggetti.Add(p.Clone());
             }
 
 
@@ -72,14 +73,12 @@ namespace csharp_oop_ecommerce_basic.model
         public Cart Clone()
         {
             return new Cart(this);
-        }
 
+        }
         //metodi specifici
         public void Clear()
         {
-            currentLenght = 0;
-            for (int i = 0; i < _prod.Length; i++)
-                _prod[i] = null;
+            oggetti.Clear();
         }
         public void Add(Product p)
         {
@@ -90,16 +89,22 @@ namespace csharp_oop_ecommerce_basic.model
 
             if (p != null)
             {
-                _prod[currentLenght] = p;
-                currentLenght++;
+                oggetti.Add(p);
+                totale = totale + p.Price;
+                totale_S = totale_S + p.getScontato();
             }
             else
+            {
                 throw new Exception("Invalid product");
+
+            }
+
+
         }
 
         private int Lenght()
         {
-            if (currentLenght != _prod.Length)
+            if (currentLenght < 100)
                 return currentLenght;
             else
                 throw new Exception("Cart full");
@@ -107,20 +112,15 @@ namespace csharp_oop_ecommerce_basic.model
 
         public int IndexOf(Product q)
         {
-            for (int i = 0; i < currentLenght; i++)
-            {
-                if (_prod[i].Equals(q))
-                    return i;
-            }
-            return -1;
+            return oggetti.IndexOf(q);
         }
 
         public void Modify(Product p)
         {
             int i = IndexOf(p);
-            if (i>=0)
+            if (i >= 0)
             {
-                _prod[i] = p;
+                oggetti[i] = p;
             }
             else
                 throw new Exception("Product not found");
@@ -130,12 +130,7 @@ namespace csharp_oop_ecommerce_basic.model
         {
             if (IndexOf(p) != -1)
             {
-                for (int i = IndexOf(p); i < _prod.Length - 1; i++)
-                    _prod[i] = _prod[i + 1];
-
-                _prod[_prod.Length - 1] = null;
-
-                --currentLenght;
+                oggetti.Remove(p);
 
                 return p;
             }
@@ -144,7 +139,7 @@ namespace csharp_oop_ecommerce_basic.model
         }
 
 
- 
+
 
     }
 }

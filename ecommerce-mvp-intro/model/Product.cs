@@ -9,8 +9,8 @@ namespace csharp_oop_ecommerce_basic.model
     //base version by Marco Borelli Nov 2022
     //extended and modified by olprofesur Nov-Dic 2022
     abstract public class Product
-    {   
-        
+    {
+
         //ATTRIBUTES
         private string _id, _name, _manufacturer, _description;
         private float _price;
@@ -95,7 +95,7 @@ namespace csharp_oop_ecommerce_basic.model
 
         public Product(string id, string name, string prod, string descr, float price)
         {
-            if(String.IsNullOrEmpty(id) || String.IsNullOrEmpty(name) || String.IsNullOrEmpty(prod) || price<=0)
+            if (String.IsNullOrEmpty(id) || String.IsNullOrEmpty(name) || String.IsNullOrEmpty(prod) || price <= 0)
             {
                 throw new Exception("invalid product parameters ");
             }
@@ -135,28 +135,55 @@ namespace csharp_oop_ecommerce_basic.model
 
         //clone
         abstract public Product Clone();
-        
+        public virtual float getScontato()
+        {
+            return Price;
+        }
+
+
+
 
 
         //Equals
 
-        public bool Equals(Product p)
-        {
-            if (p == null) return false;
-
-            if (this == p) return true;
-
-            return (this.Id == p.Id);
-        }
 
         //ToString
         public override string ToString()
         {
-            return "Product:" +Id + ";" + Name + ";" + Manufacturer+";"+Description + ";" + Price;
+            return "Product:" + Id + ";" + Name + ";" + Manufacturer + ";" + Description + ";" + Price;
         }
-        public virtual float getPrice()
+        public class Prodotto : IEquatable<Prodotto>, IComparable<Prodotto>
         {
-            return Price;
+
+            public Prodotto(string id)
+            {
+                Id = id;
+            }
+            public string Id { get; private set; }
+
+            public bool Equals(Prodotto p)
+            {
+                if (p == null) return false;
+                if (this == p)
+                    return true;
+
+                return this.Id == p.Id;
+            }
+
+            public int CompareTo(Prodotto p)
+            {
+                if (p == null)
+                    return 1;
+                else
+                    return Id.CompareTo(p.Id);
+            }
+
+            public override string ToString()
+            {
+                return "Prodotto " + Id;
+            }
+
         }
+
     }
 }

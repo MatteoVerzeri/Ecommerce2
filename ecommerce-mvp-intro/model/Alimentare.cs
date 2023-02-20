@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace csharp_oop_ecommerce_basic.model
 {
-    public class Alimentare : Product
+    public class Alimentari : Product
     {
-        private string[] ingredieni = new string[10];
-        int lung = 0;
-        DateTime scadenza;
-        DateTime data;
-        public string[] ingredienti 
+        DateTime creazione { set; get; }
+        DateTime scadenza { set; get; }
+        private int lung = 0;
+        private string[] ingredienti = new string[10];
+        public string[] Ingredienti
         {
-            get 
+            get
             {
                 return ingredienti;
             }
@@ -30,40 +30,48 @@ namespace csharp_oop_ecommerce_basic.model
                 }
             }
         }
-        public string code { get; set; }
-        public Alimentare(string id, string name, string prod, string descr, float price, DateTime scadenza, string[] ingredienti) : base(id, name, prod, descr, price)
+
+        public Alimentari(string id, string name, string prod, string descr, float price, string[] ingredienti, DateTime Scadenza) : base(id, name, prod, descr, price)
         {
-            this.scadenza = scadenza;
             this.ingredienti = ingredienti;
+            scadenza = Scadenza;
         }
-        public Alimentare(string id, string name, string prod, string descr, DateTime scadenza, string[] ingredienti) : base(id, name, prod, descr)
+        public Alimentari(string id, string name, string prod, string descro, string[] ingredienti, DateTime Scadenza) : base(id, name, prod, descro)
         {
-            this.scadenza= scadenza;
             this.ingredienti = ingredienti;
+
+            scadenza = Scadenza;
         }
-        public Alimentare(Alimentare prodotto) : base(prodotto)
+        public Alimentari(Alimentari prodotto) : base(prodotto)
         {
             ingredienti = null;
-            DateTime scadenza = DateTime.Now;
+
+            scadenza = DateTime.Now;
             scadenza.AddDays(14);
+        }
+        public Alimentari(string id) : base(id)
+        {
+            ingredienti = null;
+
         }
         override public Product Clone()
         {
-            return new Alimentare(this);
-        }
-        public override float getPrice()
-        {
-            if(DateTime.Compare(DateTime.Now, scadenza) < 0)
-            {
-                throw new Exception("prodotto scaduto, rimuovere questo prodotto dalla lista");
-            }
-            if(DateTime.Compare(DateTime.Now,scadenza.AddDays(-7))>0|| DateTime.Compare(DateTime.Now, scadenza.AddDays(-7)) == 0)
-            {
-                return base.getPrice()*50/100;
-            }
-            else 
-            return base.getPrice();
+            return new Alimentari(this);
         }
 
+        override public float getScontato()
+        {
+            if (DateTime.Compare(DateTime.Now, scadenza) > 0)
+            {
+                throw new Exception("prodotto scaduto");
+            }
+            if (DateTime.Compare(DateTime.Now, scadenza.AddDays(-7)) > 0 || DateTime.Compare(DateTime.Now, scadenza.AddDays(-7)) == 0)
+            {
+                return base.getScontato() / 100 * 50;
+            }
+            return base.getScontato();
+
+        }
     }
+
 }

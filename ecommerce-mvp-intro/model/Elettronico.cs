@@ -6,39 +6,41 @@ using System.Threading.Tasks;
 
 namespace csharp_oop_ecommerce_basic.model
 {
-    public class Elettronico : Product
+    public class elettronico : Product
     {
-        public string code { get; set; }
-        public Elettronico(string id, string name, string prod, string descr, float price, string code) : base(id, name, prod, descr, price)
-        {
-            this.code = code;
-        }
-        public Elettronico(string id, string name, string prod, string descr, string code) : base(id, name, prod, descr)
-        {
-            this.code=code;
-        }
-        public Elettronico(Elettronico prodotto) : base(prodotto)
-        {
-            code = "";
-        }
 
-        public Elettronico(string id) : base(id)
+        private string codice_modello { get; set; }
+        public elettronico(string id, string name, string prod, string descr, float price, string codice_modello) : base(id, name, prod, descr, price)
         {
+            this.codice_modello = codice_modello;
         }
-
+        public elettronico(string id, string name, string prod, string descr, string codice_modello) : base(id, name, prod, descr)
+        {
+            this.codice_modello = codice_modello;
+        }
+        public elettronico(elettronico prodotto) : base(prodotto)
+        {
+            codice_modello = "";
+        }
+        public elettronico(string id) : base(id)
+        {
+            codice_modello = "";
+        }
         override public Product Clone()
         {
-            return new Elettronico(this);
+            return new elettronico(this);
         }
-        public override float getPrice()
+        override public float getScontato()
         {
-            float temp=base.getPrice();
-                DateTime today = DateTime.Today;
-                if (today.DayOfWeek == DayOfWeek.Monday)
-                {
-                    Price = (Price * 95) / 100;
-                }
-            return base.getPrice();
+            float temp = base.getScontato();
+            DateTime today = DateTime.Today;
+            if (today.DayOfWeek == DayOfWeek.Monday)
+            {
+
+                temp = (Price / 100) * 95;
+                return temp;
+            }
+            return base.getScontato();
         }
     }
 }

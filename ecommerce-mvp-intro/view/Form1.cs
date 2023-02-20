@@ -21,49 +21,52 @@ namespace csharp_oop_ecommerce_basic
         public Form1()
         {
             InitializeComponent();
-            dateTimePicker1.Hide();
             carr = EcommerceFactory.getSampleCart();
 
             setHeaderCarrView();
             updateCarrView();
-            if (comboBox1.SelectedIndex == 0)
-            {
-                dateTimePicker1.Hide();
-            }
-            else if(comboBox1.SelectedIndex == 1)
-            {
-                dateTimePicker1.Show();
-            }
         }
 
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+
             try
             {
-                
-                if (comboBox1.SelectedIndex == 0)
-                {
-                    
-                    Product p = new Elettronico(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "nicolas ghirardi");
-                    carr.Add(p);
-                    updateCarrView();
-                }
                 if (comboBox1.SelectedIndex == 1)
                 {
-                    
-                    Product p = new Alimentare(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text),dateTimePicker1.Value,null);
+                    Product p = new elettronico(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "pippo");
                     carr.Add(p);
-                    updateCarrView();
+                    label5.Text = Convert.ToString(carr.getTotale()) + " €";
+                    label6.Text = Convert.ToString(carr.getTotale_S()) + " €";
                 }
-                /*if (comboBox1.SelectedIndex == 0)
+                if (comboBox1.SelectedIndex == 0)
                 {
-                    Product p = new Cancelleria(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "nicolas ghirardi");
+                    Product p = new Alimentari(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), null, dateTimePicker1.Value);
                     carr.Add(p);
-                    updateCarrView();
-                }*/
+                    label5.Text = Convert.ToString(carr.getTotale()) + " €";
+                    label6.Text = Convert.ToString(carr.getTotale_S()) + " €";
+                }
+                if (comboBox1.SelectedIndex == 2)
+                {
+                    Product p = new Penne(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), textBox1.Text);
+                    carr.Add(p);
+                    label5.Text = Convert.ToString(carr.getTotale()) + " €";
+                    label6.Text = Convert.ToString(carr.getTotale_S()) + " €";
+                }
+                if (comboBox1.SelectedIndex == 3)
+                {
+                    Product p = new fogli(EcommerceFactory.getProductID(), textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), textBox1.Text);
+                    carr.Add(p);
+                    label5.Text = Convert.ToString(carr.getTotale()) + " €";
+                    label6.Text = Convert.ToString(carr.getTotale_S()) + " €";
+                }
 
-            } catch(Exception ex)
+                updateCarrView();
+
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -72,8 +75,8 @@ namespace csharp_oop_ecommerce_basic
         private void buttonEdit_Click(object sender, EventArgs e)
         {
 
-            Product p = new Elettronico(labelID.Text, textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "nicolas ghirardi");
-            if(carr.IndexOf(p)<0)
+            Product p = new elettronico(labelID.Text, textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "pippo");
+            if (carr.IndexOf(p) < 0)
             {
                 MessageBox.Show("ID prodotto non valido");
                 return;
@@ -87,7 +90,7 @@ namespace csharp_oop_ecommerce_basic
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            Product p = new Elettronico(labelID.Text, textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "nicolas ghirardi");
+            Product p = new elettronico(labelID.Text, textBoxName.Text, textBoxManifacturer.Text, textBoxDescription.Text, float.Parse(textBoxPrice.Text), "pippo");
             if (carr.IndexOf(p) < 0)
             {
                 MessageBox.Show("Invalid ID");
@@ -120,11 +123,11 @@ namespace csharp_oop_ecommerce_basic
 
         public Product GetProductFromItem(ListViewItem item)
         {
-            Product p = new Elettronico(item.SubItems[0].Text);
-            
+            Product p = new elettronico(item.SubItems[0].Text);
+
             int i = carr.IndexOf(p);
             if (i >= 0)
-                return carr.Products[i];
+                return carr.Oggetti[i];
             else
                 return null;
         }
@@ -133,13 +136,13 @@ namespace csharp_oop_ecommerce_basic
         {
 
             Product p = GetProductFromItem(i);
-            if(p== null) return;
+            if (p == null) return;
 
-            labelID.Text=p.Id;
+            labelID.Text = p.Id;
             textBoxName.Text = p.Name;
             textBoxDescription.Text = p.Description;
             textBoxManifacturer.Text = p.Manufacturer;
-            textBoxPrice.Text = ""+p.Price;
+            textBoxPrice.Text = "" + p.Price;
 
         }
 
@@ -163,15 +166,15 @@ namespace csharp_oop_ecommerce_basic
             list.View = View.Details;
             list.FullRowSelect = true;
 
-            Product[] prodotti = carr.Products;
+            List<Product> prodotti = carr.Oggetti;
 
-            for (int i = 0; i < prodotti.Length; i++)
+            foreach (Product p in prodotti)
             {
-                ListViewItem item = new ListViewItem(prodotti[i].Id);
-                item.SubItems.Add(prodotti[i].Name);
-                item.SubItems.Add(prodotti[i].Manufacturer);
-                item.SubItems.Add(prodotti[i].Description);
-                item.SubItems.Add("" + prodotti[i].getPrice());
+                ListViewItem item = new ListViewItem(p.Id);
+                item.SubItems.Add(p.Name);
+                item.SubItems.Add(p.Manufacturer);
+                item.SubItems.Add(p.Description);
+                item.SubItems.Add("" + p.getScontato());
                 list.Items.Add(item);
             }
 
@@ -181,5 +184,51 @@ namespace csharp_oop_ecommerce_basic
 
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0)
+            {
+                textBox1.Hide();
+                label3.Hide();
+                dateTimePicker1.Show();
+            }
+            if (comboBox1.SelectedIndex == 1)
+            {
+                textBox1.Hide();
+                label3.Hide();
+                dateTimePicker1.Hide();
+            }
+            if (comboBox1.SelectedIndex == 2)
+            {
+                textBox1.Show();
+                label3.Text = "funzionamento";
+                label3.Show();
+                dateTimePicker1.Hide();
+            }
+            if (comboBox1.SelectedIndex == 3)
+            {
+                textBox1.Show();
+                label3.Text = "grammatura";
+                label3.Show();
+                dateTimePicker1.Hide();
+            }
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
